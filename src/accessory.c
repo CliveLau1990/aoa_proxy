@@ -39,6 +39,7 @@ int setupDroid(libusb_device *usbDevice, accessory_droid *device) {
 	bzero(device, sizeof(accessory_droid));
 
 	struct libusb_device_descriptor desc;
+	//获取usb描述符
 	int r = libusb_get_device_descriptor(usbDevice, &desc);
 	if (r < 0) {
 		logError("failed to get device descriptor\n");
@@ -46,6 +47,7 @@ int setupDroid(libusb_device *usbDevice, accessory_droid *device) {
 	}
 
 	struct libusb_config_descriptor *config;
+	//获取usb设备配置描述符
 	r = libusb_get_config_descriptor(usbDevice, 0, &config);
 	if (r < 0) {
 		logError("failed t oget config descriptor\n");
@@ -71,6 +73,8 @@ int setupDroid(libusb_device *usbDevice, accessory_droid *device) {
 					&& interdesc->bInterfaceClass == 0xff
 					&& interdesc->bInterfaceSubClass == 0xff &&
 					(device->inendp <= 0 || device->outendp <= 0)) {
+
+				//找到当前为accessory的接口
 				logDebug( "interface %d is accessory candidate\n", i);
 				for(k=0; k < (int)interdesc->bNumEndpoints; k++) {
 					epdesc = &interdesc->endpoint[k];
@@ -82,6 +86,8 @@ int setupDroid(libusb_device *usbDevice, accessory_droid *device) {
 //						cout << "[startCBS] non-bulk ep #" << k << " :" << (int)epdesc->bmAttributes << endl;
 						break;
 					}
+
+					//获取usb输入输出endpoint
 					if ((epdesc->bEndpointAddress & LIBUSB_ENDPOINT_IN) && device->inendp <= 0) {
 						device->inendp = epdesc->bEndpointAddress;
 						device->inpacketsize = epdesc->wMaxPacketSize;
@@ -129,12 +135,14 @@ int setupDroid(libusb_device *usbDevice, accessory_droid *device) {
 		return -2;
 	}
 
+	//打开usb设备
 	r = libusb_open(usbDevice, &device->usbHandle);
 	if(r < 0) {
 		logError("failed to open usb handle\n");
 		return r;
 	}
 
+	//设置批量传输 
 	r = libusb_claim_interface(device->usbHandle, device->bulkInterface);
 	if (r < 0) {
 		logError("failed to claim bulk interface\n");

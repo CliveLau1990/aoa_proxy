@@ -30,6 +30,7 @@ pthread_t sendThreadId;
 
 int loop_flag = 0;
 
+//数据接收线程
 void *recvThread(void *arg){
 
     int length;
@@ -51,10 +52,12 @@ void *recvThread(void *arg){
             loop_flag = 0;
             break;
         }
+        //打印接收到的数据内容
         printf("receive %s\n", buffer);
     }
 }
 
+//数据发送线程 每隔一秒发送
 void *sendThread(void *arg){
 
     struct thread_param *param = (struct thread_param *)arg;
@@ -87,6 +90,7 @@ void *sendThread(void *arg){
     }
 }
  
+//开启自定义服务 
 int start_service(int argc, char **argv)
 {
     printf("start_service\n");

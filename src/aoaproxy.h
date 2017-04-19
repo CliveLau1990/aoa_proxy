@@ -49,17 +49,17 @@ typedef struct t_audioXfer {
 } audioXfer;
 
 typedef struct listentry {
-	libusb_device *usbDevice;
+	libusb_device *usbDevice; //usb设备
 	int sockfd;
 	int socketDead;
 	int usbDead;
 
-	accessory_droid droid;
+	accessory_droid droid;  //accessory信息
 //	pid_t pipePid;
 //	int do_exit;
 
-	usbXferThread usbRxThread;
-	usbXferThread socketRxThread;
+	usbXferThread usbRxThread;      //写入usb线程
+	usbXferThread socketRxThread;   //读取usb线程
 	audioXfer audio;
 
 	struct listentry *prev;

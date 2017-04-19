@@ -56,7 +56,7 @@ void tickleUsbXferThread(usbXferThread *t) {
 	pthread_mutex_unlock( &t->mutex );
 }
 
-//usb读出信息写入socket
+//usb写入socket任务
 void *a2s_usbRxThread( void *d ) {
 	logDebug("a2s_usbRxThread started\n");
 
@@ -68,6 +68,7 @@ void *a2s_usbRxThread( void *d ) {
 	int sent;
 	int r;
 
+	//初始化usbRxThread.xfr ，关联数据buffer   传输完毕后回调a2s_usbrx_cb  解锁device->usbRxThread.condition
 	libusb_fill_bulk_transfer(device->usbRxThread.xfr, device->droid.usbHandle, device->droid.inendp,
 			buffer, sizeof(buffer),
 			(libusb_transfer_cb_fn)&a2s_usbrx_cb, (void*)&device->usbRxThread, 0);
@@ -78,6 +79,7 @@ void *a2s_usbRxThread( void *d ) {
 		device->usbRxThread.usbActive = 1;
 
 //		logDebug("a2s_usbRxThread reading...\n");
+		//请求数据
 		r = libusb_submit_transfer(device->usbRxThread.xfr);
 		if (r < 0) {
 			logError("a2s usbrx submit transfer failed\n");
@@ -139,7 +141,7 @@ void *a2s_usbRxThread( void *d ) {
 	return NULL;
 }
 
-//socket读出信息写入usb
+//socket写入usb任务
 void *a2s_socketRxThread( void *d ) {
 	logDebug("a2s_socketRxThread started\n");
 
@@ -149,6 +151,7 @@ void *a2s_socketRxThread( void *d ) {
 	int rxBytes = 0;
 	int r;
 
+	//初始化usbRxThread.xfr ，关联数据buffer
 	libusb_fill_bulk_transfer(device->socketRxThread.xfr, device->droid.usbHandle, device->droid.outendp,
 			buffer, sizeof(buffer),
 			(libusb_transfer_cb_fn)a2s_usbrx_cb, (void*)&device->socketRxThread, 0);
@@ -160,7 +163,7 @@ void *a2s_socketRxThread( void *d ) {
 		if (device->socketRxThread.xfr->status == LIBUSB_TRANSFER_COMPLETED) {
 //			logDebug("a2s_socketRxThread reading...\n");
 
-			//从soket中读出数据
+			//从soket中读出数据到buffer
 			rxBytes = read(device->sockfd, buffer, sizeof(buffer));
 			logDebug("recived len %d\n", rxBytes);
 			if (rxBytes <= 0) {
@@ -180,7 +183,7 @@ void *a2s_socketRxThread( void *d ) {
 		device->socketRxThread.xfr->length = rxBytes;
 
 //		logDebug("USB TX %d bytes\n", device->socketRxThread.xfr->length);
-		//异步发送usb数据
+		//异步发送buffer中的数据到usb
 		r = libusb_submit_transfer(device->socketRxThread.xfr);
 		if (r < 0) {
 			logError("a2s usbtx submit transfer failed\n");

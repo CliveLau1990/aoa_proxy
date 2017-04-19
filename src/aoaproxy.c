@@ -45,7 +45,7 @@
 //控制主循环
 static int do_exit = 0;
 static libusb_context *ctx;
-//维护当前usb与socket
+//维护当前所有usb与对应socket的链表
 struct listentry *connectedDevices;
 pthread_t usbInventoryThread;
 int doUpdateUsbInventory = 0;
@@ -183,6 +183,7 @@ int main(int argc, char** argv) {
 		if (doUpdateUsbInventory == 1) {
 			doUpdateUsbInventory = 0;
 			cleanupDeadDevices();
+			//尝试链接设备
 			updateUsbInventory(devs);
 		}
 
@@ -362,12 +363,12 @@ static int connectDevice(libusb_device *device) {
 
 	//entry拿到socket句柄
 #ifdef SOCKET_RETRY
-	//连接本地socketserver 
+	//连接本地socketserver, 返回socket客户端的描述符
 	while((r = connectTcpSocket(hostname, portno)) <= 0) {
 		logError("failed to setup socket: %d, retrying\n", r);
 		sleep(1);
 	}
-	//获取本地soket链接的描述符
+	//记录本地soket链接的描述符
 	entry->sockfd = r;
 	entry->socketDead = 0;
 #else
@@ -382,6 +383,7 @@ static int connectDevice(libusb_device *device) {
 #endif
 	//如果android设备已经是aoa模式,打开usb
 	logDebug("start setup droid \n");
+	//找到accessory接口并用接口信息初始化entry->droid
 	r = setupDroid(device, &entry->droid);
 	if (r < 0) {
 		logError("failed to setup droid: %d\n", r);
@@ -389,6 +391,7 @@ static int connectDevice(libusb_device *device) {
 		return -3;
 	}
 
+	//将entry加入链表
 	entry->next = NULL;
 	if (connectedDevices == NULL) {
 		entry->prev = NULL;
