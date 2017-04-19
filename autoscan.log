@@ -1,0 +1,88 @@
+autoscan: warning: missing AC_CHECK_FUNCS([bzero]) wanted by: 
+	src/accessory.c:39
+	src/aoaproxy.c:357
+	src/local_service.c:39
+	src/local_service.c:61
+	src/local_service.c:88
+	src/local_service.c:135
+	src/tcp.c:52
+autoscan: warning: missing AC_CHECK_FUNCS([gethostbyname]) wanted by: 
+	src/tcp.c:45
+autoscan: warning: missing AC_CHECK_FUNCS([memset]) wanted by: 
+	src/a2spipe.c:383
+	src/aoaproxy.c:206
+	src/aoaproxy.c:218
+autoscan: warning: missing AC_CHECK_FUNCS([socket]) wanted by: 
+	src/local_service.c:94
+	src/tcp.c:39
+autoscan: warning: missing AC_CHECK_FUNCS([strdup]) wanted by: 
+	src/aoaproxy.c:100
+autoscan: warning: missing AC_CHECK_FUNCS([strtol]) wanted by: 
+	src/aoaproxy.c:114
+	src/aoaproxy.c:115
+autoscan: warning: missing AC_CHECK_HEADERS([fcntl.h]) wanted by: 
+	src/aoaproxy.c:34
+	src/tcp.c:25
+	src/tcp.h:28
+autoscan: warning: missing AC_CHECK_HEADERS([netdb.h]) wanted by: 
+	src/aoaproxy.c:30
+	src/tcp.c:29
+autoscan: warning: missing AC_CHECK_HEADERS([netinet/in.h]) wanted by: 
+	src/aoaproxy.c:29
+	src/local_service.c:1
+	src/tcp.c:27
+autoscan: warning: missing AC_CHECK_HEADERS([stdlib.h]) wanted by: 
+	src/a2spipe.c:27
+	src/accessory.c:23
+	src/aoaproxy.c:23
+	src/local_service.c:5
+autoscan: warning: missing AC_CHECK_HEADERS([string.h]) wanted by: 
+	src/a2spipe.c:31
+	src/accessory.c:24
+	src/aoaproxy.c:31
+	src/audio.c:53
+	src/local_service.c:6
+autoscan: warning: missing AC_CHECK_HEADERS([strings.h]) wanted by: 
+	src/tcp.c:30
+autoscan: warning: missing AC_CHECK_HEADERS([sys/socket.h]) wanted by: 
+	src/aoaproxy.c:28
+	src/local_service.c:3
+	src/tcp.c:26
+	src/tcp.h:29
+autoscan: warning: missing AC_CHECK_HEADERS([syslog.h]) wanted by: 
+	src/log.h:26
+autoscan: warning: missing AC_CHECK_HEADERS([unistd.h]) wanted by: 
+	src/a2spipe.c:28
+	src/aoaproxy.c:25
+	src/tcp.c:24
+	src/tcp.h:27
+autoscan: warning: missing AC_C_INLINE wanted by: 
+	src/aoaproxy.c:566
+autoscan: warning: missing AC_FUNC_FORK wanted by: 
+	src/aoaproxy.c:640
+autoscan: warning: missing AC_FUNC_MALLOC wanted by: 
+	src/a2spipe.c:314
+	src/a2spipe.c:315
+	src/aoaproxy.c:111
+	src/aoaproxy.c:352
+	src/audio.c:186
+	src/audio.c:191
+	src/audio.c:196
+autoscan: warning: missing AC_TYPE_PID_T wanted by: 
+	src/aoaproxy.c:640
+	src/aoaproxy.c:658
+	src/aoaproxy.h:58
+autoscan: warning: missing AC_TYPE_SSIZE_T wanted by: 
+	src/aoaproxy.c:247
+	src/aoaproxy.c:248
+	src/aoaproxy.c:258
+autoscan: warning: missing AC_TYPE_UINT16_T wanted by: 
+	src/accessory.c:269
+autoscan: warning: missing AC_TYPE_UINT8_T wanted by: 
+	src/a2spipe.c:231
+	src/a2spipe.c:231
+	src/a2spipe.c:314
+	src/a2spipe.c:319
+	src/accessory.h:41
+	src/accessory.h:45
+	src/aoaproxy.c:566
