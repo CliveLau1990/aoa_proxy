@@ -30,8 +30,7 @@ const char *vendor = "vonchenchen";
 const char *model = "android.usbaoa";
 const char *description = "Android Aoa Interface";
 const char *version = "0.1";
-//const char *uri = "https://www.baidu.com/";
-const char *uri = "http://wap.raintai.com/appdown/weixinAppStudentStore.html";
+const char *uri = "https://www.baidu.com/";
 const char *serial = "1234567890";
 
 int setupDroid(libusb_device *usbDevice, accessory_droid *device) {
