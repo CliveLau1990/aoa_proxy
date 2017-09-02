@@ -36,7 +36,7 @@
 #include "aoaproxy.h"
 #include "accessory.h"
 #include "a2spipe.h"
-#include "audio.h"
+//#include "audio.h"
 #include "tcp.h"
 //#include "bluetooth.h"
 #include "log.h"
@@ -61,17 +61,11 @@ static void disconnectDevice(libusb_device *dev);
 static void disconnectSocket(struct listentry *device);
 static int startUSBPipe(struct listentry *device);
 static void stopUSBPipe(struct listentry *device);
-static int startAudio(struct listentry *device);
-static int stopAudio(struct listentry *device);
 static void sig_hdlr(int signum);
 static void tickleUsbInventoryThread();
 int do_fork_foo();
 
-audioStruct audio;
-
-static int haveAudio = 0;
 static int haveBluetooth = 0;
-//static bluetoothtoken_t *bt = NULL;
 
 static const char *hostname = "localhost";
 static struct t_excludeList *exclude = NULL;
@@ -139,12 +133,6 @@ int main(int argc, char** argv) {
 	//开启本地socketserver
 	create_start_service();
 
-	/*if(initAudio(&audio) == 0) {
-		haveAudio = 1;
-	} else {
-		logError("failed to open audio device - starting without");
-		haveAudio = 0;
-	}*/
 	if (do_fork)
 		do_fork_foo();
 
@@ -155,18 +143,6 @@ int main(int argc, char** argv) {
 		logError("Failed to initialize USB\n");
 		return 1;
 	}
-
-	/*if(haveAudio) {
-		pthread_create(&audio.thread, NULL, (void*)&audioThreadFunction, (void*)&audio);
-	}*/
-
-	/*if ((bt = initBluetooth(hostname, portno)) != NULL) {
-		haveBluetooth = 1;
-		pthread_create(&bt->thread, NULL, (void*)&bluetoothThreadFunction, (void*)bt);
-	} else {
-		haveBluetooth = 0;
-		logError("Failed to initialize bluetooth - starting without");
-	}*/
 
 	if(autoscan) {
 		struct itimerval timer;
@@ -226,9 +202,9 @@ static void shutdownEverything() {
 	if (ctx != NULL)
 		libusb_exit(ctx); //close the session
 
-	if (haveAudio) {
-		deinitAudio(&audio);
-	}
+	// if (haveAudio) {
+	// 	deinitAudio(&audio);
+	// }
 
 	/*if (bt != NULL) {
 		deinitBluetooth(bt);
@@ -346,7 +322,7 @@ static int connectDevice(libusb_device *device) {
 		logDebug("attempting AOA on device 0x%04X:%04X\n",
 				desc.idVendor, desc.idProduct);
 		//写入要启动的应用的信息 开启android的accessory模式	
-		switchDroidToAcc(device, 1, haveAudio);
+		switchDroidToAcc(device, 1);
 		return -1;
 	}
 
@@ -412,10 +388,6 @@ static int connectDevice(libusb_device *device) {
 		return -5;
 	}
 
-	if (haveAudio && entry->droid.audioendp) {
-		startAudio(entry);
-	}
-
 	logDebug("new Android connected");
 	return 0;
 }
@@ -434,9 +406,6 @@ static void disconnectDevice(libusb_device *dev) {
 				device->next->prev = device->prev;
 			}
 
-			if (device->droid.audioendp) {
-				stopAudio(device);
-			}
 			stopUSBPipe(device);
 			disconnectSocket(device);
 			shutdownUSBDroid(device->usbDevice, &device->droid);
@@ -567,27 +536,6 @@ static void stopUSBPipe(struct listentry *device) {
 }
 
 int audioError = 1;
-
-static inline void audio_callback(uint8_t *buf, int len) {
-	if(len != 0 && 	playAudio(&audio, (char*)buf, len) == 0) {
-		if (audioError) {
-			audioError = 0;
-			logError("first audio error\n");
-		}
-	}
-}
-
-static int startAudio(struct listentry *device) {
-	requestAudio(&audio);
-	fnusb_start_iso(device, &audio_callback, device->droid.audioendp, 8, 16, device->droid.audiopacketsize);
-	return 0;
-}
-
-static int stopAudio(struct listentry *device) {
-	fnusb_stop_iso(device, ctx);
-	releaseAudio(&audio);
-	return 0;
-}
 
 static void initSigHandler() {
 	struct sigaction sigact;

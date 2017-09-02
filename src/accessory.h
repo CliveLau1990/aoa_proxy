@@ -69,7 +69,7 @@ typedef struct t_accessory_droid {
 } accessory_droid;
 
 int isDroidInAcc(libusb_device *dev);
-void switchDroidToAcc(libusb_device *dev, int force, int audio);
+void switchDroidToAcc(libusb_device *dev, int force);
 int setupDroid(libusb_device *usbDevice, accessory_droid *device);
 int shutdownUSBDroid(libusb_device *usbDevice, accessory_droid *device);
 

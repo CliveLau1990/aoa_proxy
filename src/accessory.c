@@ -227,7 +227,7 @@ typedef struct _USB_SETUP_PACKET
 */
 
 //用于切换android设备到acc模式 
-void switchDroidToAcc(libusb_device *dev, int force, int audio) {
+void switchDroidToAcc(libusb_device *dev, int force) {
 	struct libusb_device_handle* handle;
 	unsigned char ioBuffer[2];
 	int r;
@@ -289,25 +289,6 @@ void switchDroidToAcc(libusb_device *dev, int force, int audio) {
 				(unsigned char*)setupStrings[i],
 				strlen(setupStrings[i]),2000))) {
 			logDebug( "send string %d call failed\n", i);
-			libusb_close(handle);
-			return;
-		}
-	}
-
-	if (deviceProtocol >= 2) {
-		if(0 > (r = libusb_control_transfer(handle,
-				0x40, //厂商的请求
-				58,
-#ifdef USE_AUDIO
-				audio, // 0=no audio, 1=2ch,16bit PCM, 44.1kHz
-#else
-				0,
-#endif
-				0,
-				NULL,
-				0,
-				2000))) {
-			logDebug( "set audio call failed\n");
 			libusb_close(handle);
 			return;
 		}

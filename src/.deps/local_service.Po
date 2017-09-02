@@ -3,7 +3,7 @@ local_service.o: local_service.c /usr/include/netinet/in.h \
   /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h \
   /usr/include/sys/_posix_availability.h /usr/include/machine/_types.h \
   /usr/include/i386/_types.h /usr/include/sys/_pthread/_pthread_types.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include/stdint.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.1.0/include/stdint.h \
   /usr/include/stdint.h /usr/include/sys/_types/_int8_t.h \
   /usr/include/sys/_types/_int16_t.h /usr/include/sys/_types/_int32_t.h \
   /usr/include/sys/_types/_int64_t.h /usr/include/_types/_uint8_t.h \
@@ -15,7 +15,10 @@ local_service.o: local_service.c /usr/include/netinet/in.h \
   /usr/include/sys/_types/_in_addr_t.h \
   /usr/include/sys/_types/_in_port_t.h /usr/include/sys/socket.h \
   /usr/include/sys/types.h /usr/include/machine/types.h \
-  /usr/include/i386/types.h /usr/include/machine/endian.h \
+  /usr/include/i386/types.h /usr/include/sys/_types/_u_int8_t.h \
+  /usr/include/sys/_types/_u_int16_t.h \
+  /usr/include/sys/_types/_u_int32_t.h \
+  /usr/include/sys/_types/_u_int64_t.h /usr/include/machine/endian.h \
   /usr/include/i386/endian.h /usr/include/sys/_endian.h \
   /usr/include/libkern/_OSByteOrder.h \
   /usr/include/libkern/i386/_OSByteOrder.h \
@@ -48,7 +51,8 @@ local_service.o: local_service.c /usr/include/netinet/in.h \
   /usr/include/sys/_pthread/_pthread_key_t.h \
   /usr/include/sys/_types/_fsblkcnt_t.h \
   /usr/include/sys/_types/_fsfilcnt_t.h /usr/include/machine/_param.h \
-  /usr/include/i386/_param.h /usr/include/sys/_types/_sa_family_t.h \
+  /usr/include/i386/_param.h /usr/include/net/net_kev.h \
+  /usr/include/sys/_types/_sa_family_t.h \
   /usr/include/sys/_types/_socklen_t.h \
   /usr/include/sys/_types/_iovec_t.h /usr/include/netinet6/in6.h \
   /usr/include/stdio.h /usr/include/_types.h \
@@ -90,7 +94,7 @@ local_service.o: local_service.c /usr/include/netinet/in.h \
 
 /usr/include/sys/_pthread/_pthread_types.h:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.3.0/include/stdint.h:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.1.0/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -133,6 +137,14 @@ local_service.o: local_service.c /usr/include/netinet/in.h \
 /usr/include/machine/types.h:
 
 /usr/include/i386/types.h:
+
+/usr/include/sys/_types/_u_int8_t.h:
+
+/usr/include/sys/_types/_u_int16_t.h:
+
+/usr/include/sys/_types/_u_int32_t.h:
+
+/usr/include/sys/_types/_u_int64_t.h:
 
 /usr/include/machine/endian.h:
 
@@ -227,6 +239,8 @@ local_service.o: local_service.c /usr/include/netinet/in.h \
 /usr/include/machine/_param.h:
 
 /usr/include/i386/_param.h:
+
+/usr/include/net/net_kev.h:
 
 /usr/include/sys/_types/_sa_family_t.h:
 

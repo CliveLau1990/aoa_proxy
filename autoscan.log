@@ -1,19 +1,19 @@
 autoscan: warning: missing AC_CHECK_FUNCS([bzero]) wanted by: 
-	src/accessory.c:39
-	src/aoaproxy.c:357
-	src/local_service.c:39
-	src/local_service.c:61
-	src/local_service.c:88
-	src/local_service.c:135
+	src/accessory.c:38
+	src/aoaproxy.c:359
+	src/local_service.c:44
+	src/local_service.c:69
+	src/local_service.c:99
+	src/local_service.c:148
 	src/tcp.c:52
 autoscan: warning: missing AC_CHECK_FUNCS([gethostbyname]) wanted by: 
 	src/tcp.c:45
 autoscan: warning: missing AC_CHECK_FUNCS([memset]) wanted by: 
-	src/a2spipe.c:383
-	src/aoaproxy.c:206
-	src/aoaproxy.c:218
+	src/a2spipe.c:386
+	src/aoaproxy.c:208
+	src/aoaproxy.c:220
 autoscan: warning: missing AC_CHECK_FUNCS([socket]) wanted by: 
-	src/local_service.c:94
+	src/local_service.c:105
 	src/tcp.c:39
 autoscan: warning: missing AC_CHECK_FUNCS([strdup]) wanted by: 
 	src/aoaproxy.c:100
@@ -57,32 +57,32 @@ autoscan: warning: missing AC_CHECK_HEADERS([unistd.h]) wanted by:
 	src/tcp.c:24
 	src/tcp.h:27
 autoscan: warning: missing AC_C_INLINE wanted by: 
-	src/aoaproxy.c:566
+	src/aoaproxy.c:571
 autoscan: warning: missing AC_FUNC_FORK wanted by: 
-	src/aoaproxy.c:640
+	src/aoaproxy.c:645
 autoscan: warning: missing AC_FUNC_MALLOC wanted by: 
-	src/a2spipe.c:314
-	src/a2spipe.c:315
+	src/a2spipe.c:317
+	src/a2spipe.c:318
 	src/aoaproxy.c:111
-	src/aoaproxy.c:352
+	src/aoaproxy.c:354
 	src/audio.c:186
 	src/audio.c:191
 	src/audio.c:196
 autoscan: warning: missing AC_TYPE_PID_T wanted by: 
-	src/aoaproxy.c:640
-	src/aoaproxy.c:658
+	src/aoaproxy.c:645
+	src/aoaproxy.c:663
 	src/aoaproxy.h:58
 autoscan: warning: missing AC_TYPE_SSIZE_T wanted by: 
-	src/aoaproxy.c:247
-	src/aoaproxy.c:248
-	src/aoaproxy.c:258
+	src/aoaproxy.c:249
+	src/aoaproxy.c:250
+	src/aoaproxy.c:260
 autoscan: warning: missing AC_TYPE_UINT16_T wanted by: 
-	src/accessory.c:269
+	src/accessory.c:288
 autoscan: warning: missing AC_TYPE_UINT8_T wanted by: 
-	src/a2spipe.c:231
-	src/a2spipe.c:231
-	src/a2spipe.c:314
-	src/a2spipe.c:319
+	src/a2spipe.c:234
+	src/a2spipe.c:234
+	src/a2spipe.c:317
+	src/a2spipe.c:322
 	src/accessory.h:41
 	src/accessory.h:45
-	src/aoaproxy.c:566
+	src/aoaproxy.c:571
